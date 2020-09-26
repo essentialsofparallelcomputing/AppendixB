@@ -17,7 +17,7 @@ endif (CMAKE_VECTOR_NOVEC)
 find_package(OpenMP)
 
 # Adds build target of max_reduction with source code files
-add_executable(max_reduction max_reduction.c timer.c timer.h)
+add_executable(max_reduction main.c max_reduction.c timer.c timer.h)
 set_target_properties(max_reduction PROPERTIES COMPILE_FLAGS ${VECTOR_C_FLAGS})
 set_target_properties(max_reduction PROPERTIES COMPILE_FLAGS ${OpenMP_C_FLAGS})
 set_target_properties(max_reduction PROPERTIES LINK_FLAGS "${OpenMP_C_FLAGS}")
