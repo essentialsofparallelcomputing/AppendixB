@@ -30,9 +30,9 @@ int main(int argc, char *argv[]){
 
    // allocate host memory and initialize
    double *a, *b, *c;
-   CudaMallocHost(&a,stream_array_size*sizeof(double));
-   CudaMallocHost(&b,stream_array_size*sizeof(double));
-   CudaMallocHost(&c,stream_array_size*sizeof(double));
+   cudaMallocHost(&a,stream_array_size*sizeof(double));
+   cudaMallocHost(&b,stream_array_size*sizeof(double));
+   cudaMallocHost(&c,stream_array_size*sizeof(double));
 
    for (int i=0; i<stream_array_size; i++) {
       a[i] = 1.0;
@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
    cudaFree(b_d);
    cudaFree(c_d);
 
-   free(a);
-   free(b);
-   free(c);
+   cudaFreeHost(a);
+   cudaFreeHost(b);
+   cudaFreeHost(c);
 }
