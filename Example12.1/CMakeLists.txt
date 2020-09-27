@@ -1,0 +1,23 @@
+cmake_minimum_required (VERSION 3.8)
+project (StreamTriad)
+
+enable_language(CXX CUDA)
+
+set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CUDA_STANDARD 11)
+
+#set (ARCH_FLAGS -arch=sm_30)
+set (CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS}; "-O3 ${ARCH_FLAGS}")
+
+# Adds build target of StreamTriad with source code files
+add_executable(StreamTriad StreamTriad.cu timer.c timer.h)
+
+set_target_properties(StreamTriad PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+
+if (APPLE)
+    set_property(TARGET StreamTriad PROPERTY BUILD_RPATH ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
+endif(APPLE)
+
+# Cleanup
+add_custom_target(distclean COMMAND rm -rf CMakeCache.txt CMakeFiles
+                  Makefile cmake_install.cmake StreamTriad.dSYM ipo_out.optrpt)
