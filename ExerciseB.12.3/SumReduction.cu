@@ -85,7 +85,7 @@ extern "C" {
 
 int main(int argc, char *argv[]){
 
-   size_t nsize = 18000;
+   size_t nsize = 200;
 
    double *x = (double *)malloc(nsize*sizeof(double));
 
