@@ -13,12 +13,12 @@ void print_array(int gridsize, int blockDim, int isize, int offset, int *array)
       for (int tiX=0; tiX<blockDim; tiX++){
          int giX = tiX + blockIdx*blockDim;
          if (tiX < offset && giX < isize) {
-            printf("%3d ",array[giX]);
+//          printf("%3d ",array[giX]);
             isum += array[giX];
             icount++;
          }
       } // tiX
-      printf("   ");
+//    printf("   ");
    } // block
    printf("\nSum is %d. Data count is reduced to %d\n",isum,icount);
 }
@@ -90,9 +90,9 @@ void reduce_sum_stage1of2_revealed(int gridsize, int blockDim, int isize, int *a
       for (int tiX=0; tiX<blockDim; tiX++){
          int giX = tiX + blockIdx*blockDim;
 
-         printf("%3d ",giX);
+//       printf("%3d ",giX);
       } // tiX
-      printf("   ");
+//    printf("   ");
    } // block
    printf("\n");
 
@@ -107,7 +107,7 @@ void reduce_sum_stage1of2_revealed(int gridsize, int blockDim, int isize, int *a
 
    for (int blockstart=0; blockstart<gridsize; blockstart++){
       int giX = blockstart*blockDim;
-      printf("Sum by block for block %d is %d\n",blockstart,array[giX]);
+//    printf("Sum by block for block %d is %d\n",blockstart,array[giX]);
       if (gridsize == 1) {
          printf("\n Can skip second pass and the sum of the array is the block sum %d\n",array[0]);
       }
@@ -141,7 +141,7 @@ void reduce_sum_stage2of2_revealed(int gridsize, int blockDim, int isize, int *a
 
 int main(int argc, char *argv[]){
 
-   size_t nsize = 200;
+   size_t nsize = 18000;
 
    size_t blocksize = 128;
    size_t blocksizebytes = blocksize*sizeof(double);
@@ -165,7 +165,7 @@ int main(int argc, char *argv[]){
       reduce_sum_stage2of2_revealed(1, blocksize, gridsize, array);//<<<gridsize, blocksize, blocksizebytes>>>(nsize, dev_total_sum, dev_redscratch);
    }
 
-   printf("Result -- total sum %lf \n",array[0]);
+   printf("Result -- total sum %d \n",array[0]);
 
    free(array);
 }
